@@ -2,8 +2,8 @@
   <div class="container">
     <ProductForm :onAddProduct="handleOnAddProduct"/>
     <div class="box">
-      <Search />    
-      <ProductList :products="products"/>
+      <Search :onSearch="handleSearchProducts"/>    
+      <ProductList :products="listedProducts.length > 0 ? listedProducts : products"/>
     </div>
   </div>
 </template>
@@ -22,23 +22,21 @@ export default {
   },
   data(){
     return{
-      products: [
-        {
-          name: 'Iphone 12',
-          price: '10000.00',
-          category: 'Smartphone',
-        },
-        {
-          name: 'Samsung Galaxy',
-          price: '5000.00',
-          category: 'Smartphone',
-        },
-      ]
+      products: [],
+      listedProducts: [],
     }
   },
   methods: {
     handleOnAddProduct(product){
       this.products = this.products.concat(product);
+    },
+    handleSearchProducts(text){
+      const results = this.products.filter((e) => e.name.startsWith(text));
+      if(results.length > 0){
+        this.listedProducts = results;
+      } else{
+        this.listedProducts = this.products;
+      }
     }
   }
 }
