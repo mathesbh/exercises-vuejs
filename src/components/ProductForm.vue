@@ -2,9 +2,9 @@
   <div>
     <form @submit.prevent="onFormSubmit">
       <p>Cadastro de Produtos:</p>
-      <input type="text" placeholder="Nome" v-model="name">
-      <input type="number" placeholder="Preço" v-model="price">
-      <input type="text" placeholder="Categoria" v-model="category">
+      <input type="text" placeholder="Nome" v-model="name" required>
+      <input type="number" placeholder="Preço" v-model="price" required>
+      <input type="text" placeholder="Categoria" v-model="category" required>
       <input type="submit" value="Cadastrar">
     </form>
   </div>
@@ -31,6 +31,9 @@ export default {
         category: this.category,
       };
       this.onAddProduct(product);
+      this.name = '';
+      this.price = '';
+      this.category = '';
     },
   }
 }
