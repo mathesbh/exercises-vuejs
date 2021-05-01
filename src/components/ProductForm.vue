@@ -7,6 +7,7 @@
       <input type="text" placeholder="Categoria" v-model="category" required>
       <input type="submit" value="Cadastrar">
     </form>
+    <router-link to="/products">Visualizar lista de produtos cadastrados</router-link>
   </div>
 </template>
 
@@ -21,7 +22,6 @@ export default {
     }
   },
   props: {
-    onAddProduct: Function,
   },
   methods: {
     onFormSubmit(){
@@ -30,7 +30,7 @@ export default {
         price: this.price,
         category: this.category,
       };
-      this.onAddProduct(product);
+      this.$store.dispatch('addProduct', product);
       this.name = '';
       this.price = '';
       this.category = '';
@@ -67,5 +67,13 @@ export default {
     color: white;
     font-weight: bold;
     font-size: 1.2em;
+  }
+  a{
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    font-size: 1.2rem;
+    color: chocolate;
   }
 </style>
